@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalhes Horário</title>
+
+    <style>
+        table, th, td {
+          border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+    <h1>Detalhes Horário</h1>
+    <a href="/">Menu</a>
+    <a href="/horarios">Horarios</a>
+
+    <br>
+    <br>
+    
+    <b>Id Horário: </b> <span th:text="${horario.id}"></span>
+    <br><b>Cliente: </b> <span th:text="${horario.cliente?.nome}"></span>
+    <br><b>Funcionario: </b> <span th:text="${horario.funcionario?.nome}"></span>
+    <br><b>Procedimento: </b> <span th:text="${horario.procedimento?.nome}"></span>
+    <br>
+    <br>
+
+
+    <form th:action="@{/associarHorarioCliente(idHorario=${horario.id})}" method="POST">
+        <label><b>Clientes:</b></label>
+        <select name="id" required>
+            <option value="">Escolha o cliente</option>
+            <option th:each="cliente : ${clientes}"
+                        th:value="${cliente.id}"
+                        th:text="${cliente.nome}">
+            </option>
+        </select>
+        <input type="submit" value="Associar Cliente" />
+    </form>
+
+    <form th:action="@{/associarHorarioFuncionario(idHorario=${horario.id})}" method="POST">
+        <label><b>Funcionarios:</b></label>
+        <select name="id" required>
+            <option value="">Escolha o funcionario</option>
+            <option th:each="funcionario : ${funcionarios}"
+                        th:value="${funcionario.id}"
+                        th:text="${funcionario.nome}">
+            </option>
+        </select>
+        <input type="submit" value="Associar Funcionário" />
+    </form>
+
+    <form th:action="@{/associarHorarioProcedimento(idHorario=${horario.id})}" method="POST">
+        <label><b>Procedimento:</b></label>
+        <select name="id" required>
+            <option value="">Escolha o procedimento</option>
+            <option th:each="procedimento : ${procedimentos}"
+                        th:value="${procedimento.id}"
+                        th:text="${procedimento.nome}">
+            </option>
+        </select>
+        <input type="submit" value="Associar Procedimento" />
+    </form>
+
+</body>
+</html>

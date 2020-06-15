@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Funcionario</title>
+
+    <style>
+        table, th, td {
+          border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+    <h1>Cadastro de Funcionário/ Funcionários Cadastrados</h1>    
+    <a href="/">Menu</a>
+    <br>
+    <br>
+
+    <!-- Formulário para cadastrar novo cliente -->
+    <h2>Novo Cliente</h2>
+    <form th:action="@{/salvarFuncionario}" th:object="${funcionario}" method="POST">
+        <label>Nome: </label>
+        <input type="text" placeholder="Digite o nome" name="nome" required/>
+
+        <!-- <label>Autor Principal: </label>
+        <select th:field="${livro.autor}" required>
+            <option value="">Escolha o autor</option>
+            <option th:each="autor : ${autores}"
+                        th:value="${autor.id}"
+                        th:text="${autor.nome}">
+            </option>
+        </select>
+
+        <label>Editora: </label>
+        <select th:field="${livro.editora}" required>
+            <option value="">Escolha a editora</option>
+            <option th:each="editora : ${editoras}"
+                        th:value="${editora.id}"
+                        th:text="${editora.nome}">
+            </option>
+        </select> -->
+
+        <input type="submit" value="Salvar" />
+
+    </form>
+
+    <br>
+    <br>
+
+    <table>
+        <tr>
+            <th>Id Funcionário</th>
+            <th>Nome Funcionário</th>
+            <!-- <th>Remover</th>
+            <th>Editar</th> -->
+            <th>Detalhes</th>
+
+            <tr th:each="funcionario : ${funcionarios}">
+                <td th:text="${funcionario.id}"></td>
+                <td th:text="${funcionario.nome}"></td>
+                <!-- <td> <a th:href="@{'/removerLivro?idlivro=' + ${livro.id}}">Remover</a></td> 
+                <td> <a th:href="@{'/editarLivro?id=' + ${livro.id}}">Editar</a></td>   -->
+                <td> <a th:href="@{'/detalhesFuncionarios/' + ${funcionario.id}}">Detalhes</a></td>
+                
+            </tr>
+        </tr>
+    </table>
+    
+</body>
+</html>
